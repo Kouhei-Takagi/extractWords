@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>「前記」で始まる単語を抜き出す</title>
+</head>
+<body>
+
+<!-- テキストボックスとボタン -->
+<textarea id="inputText" rows="25" cols="100" placeholder="文章を入力してください..."></textarea>
+<br>
+<button onclick="extractWords()">単語を抜き出す</button>
+
+<!-- 結果表示エリア -->
+<h3>抜き出された単語:</h3>
+<ul id="resultList"></ul>
+
+<script>
+    function extractWords() {
+        const text = document.getElementById('inputText').value;
+        console.log("入力された文章:", text);
+        const pattern = /前記[^、。]+?(の|に|が|を|で|へ|と)/g;
+        const matches = text.match(pattern) || [];
+        console.log(matches);
+
+        // 結果表示エリアをクリア
+        const resultList = document.getElementById('resultList');
+        resultList.innerHTML = '';
+
+        // 抜き出された単語をリストとして表示
+        for (const word of matches) {
+            const li = document.createElement('li');
+            li.textContent = word;
+            resultList.appendChild(li);
+        }
+    }
+</script>
+
+</body>
+</html>
